@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Set some sensible defaults
-export CORE_CONF_fs_defaultFS=${CORE_CONF_fs_defaultFS:-hdfs://`hostname -f`:8020}
+export CORE_CONF_fs_defaultFS=${CORE_CONF_fs_defaultFS:-hdfs://`hostname -f`:9000}
 
 function addProperty() {
   local path=$1
@@ -51,6 +51,7 @@ if [ "$MULTIHOMED_NETWORK" = "1" ]; then
 
     # YARN
     addProperty /etc/hadoop/yarn-site.xml yarn.resourcemanager.bind-host 0.0.0.0
+    addProperty /etc/hadoop/yarn-site.xml yarn.nodemanager.bind-host 0.0.0.0
     addProperty /etc/hadoop/yarn-site.xml yarn.nodemanager.bind-host 0.0.0.0
     addProperty /etc/hadoop/yarn-site.xml yarn.timeline-service.bind-host 0.0.0.0
 
